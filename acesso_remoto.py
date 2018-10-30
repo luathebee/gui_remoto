@@ -18,9 +18,6 @@ class Base:
 
     ## ------------------------------------------
     ##  *acessoWindows*
-    ##
-    ## Invoca o remmina com o arquivo .rpd contendo as configurações de acesso ao 
-    ##  terminal remoto.
     ## ------------------------------------------
 
     def acessoWindows(self, widget):
@@ -30,12 +27,6 @@ class Base:
     
     ## ------------------------------------------
     ##  *acessoLinux*
-    ##
-    ## Invoca o x2go com a opção de conexão ao nome da sessão já configurada. 
-    ## *Verificar se funciona para o caso de diversos usuários.
-    ## Possível habilitar a opção de login automático por SSH, que tenta o log in no anfitrião
-    ##  com as mesmas credenciais que o usuário cliente.
-    ##  Se funcionar, habilitar opção --thinclient para esconder a interface do X2Go
     ## ------------------------------------------
 
     def acessoLinux(self, widget):
