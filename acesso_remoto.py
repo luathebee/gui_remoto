@@ -31,7 +31,8 @@ class Base:
 
     def acessoLinux(self, widget):
         #Ativar opcao de login por ssh no x2go e --hide e --thinclient p/ ocultar a interface
-        args = ("/usr/bin/x2goclient --session=servidor_remoto")
+        #uma vez que as confs seja ddefinidas, --no-session-edit bloqueia o acesso a as configs
+        args = ("/usr/bin/x2goclient --session-conf=sessions --session=linux_remoto")
         subprocess.call(args,stdout=subprocess.PIPE,shell=True)
         popen.wait()
 

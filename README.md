@@ -6,7 +6,7 @@ Interface gráfica para acessar opções de acesso remoto previamente configurad
 	Solicita nome de usuário e senha do IdUFSC.
 	
 ### Acesso ao Linux
-	Inicia uma sessão do x2go. Solicita usuário e senha para o acesso remoto.
+	Inicia uma sessão do X2Go definida no arquivo "sessions". Solicita usuário e senha para o acesso remoto.
 	Opção de SSH Login permite o uso das credenciais do usuário cliente no login do anfitrião automáticamente. Testar implementação.
 	
 
