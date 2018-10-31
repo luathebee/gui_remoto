@@ -21,7 +21,7 @@ class Base:
     ## ------------------------------------------
 
     def acessoWindows(self, widget):
-        args = ("/usr/bin/remmina -c ~/.config/remmina/terminal_windows.rdp ")
+        args = ("/usr/bin/remmina -c terminal_windows.rdp ")
         popen = subprocess.call(args,stdout=subprocess.PIPE,shell=True)
         popen.wait()
     
