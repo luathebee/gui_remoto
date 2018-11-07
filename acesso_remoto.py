@@ -31,8 +31,9 @@ class Base:
 
     def fazAcessoLinux(self, widget):
         #Ativar opcao de login por ssh no x2go e --hide e --thinclient p/ ocultar a interface
+        #--close-disconnect fecha o x2go em caso desconectado
         #uma vez que as confs seja ddefinidas, --no-session-edit bloqueia o acesso a as configs
-        args = ("/usr/bin/x2goclient --session-conf=sessions --session=linux_remoto")
+        args = ("/usr/bin/x2goclient --session-conf=sessions --session=linux_remoto --close-disconnect --thinclient")
         print("Iniciando sessao X2Go")
         subprocess.call(args,stdout=subprocess.PIPE,shell=True)
 
@@ -42,8 +43,12 @@ class Base:
 
     def instanciaLinux(self, widget):
         #Defince a criacao da thread que instancia o acesso ao servidor
+        self.botaoAcesso2.set_sensitive(False)
         acessoLinux = threading.Thread(target=self.fazAcessoLinux,args=[self])
         acessoLinux.start()
+        acessoLinux.wait()
+        self.botaoAcesso2.set_sensitive(True)
+
 
     ## ------------------------------------------
     ##  *instanciaWindows*
@@ -51,10 +56,11 @@ class Base:
 
     def instanciaWindows(self, widget):
         #Defince a criacao da thread que instancia o acesso ao servidor
+        self.botaoAcesso1.set_sensitive(False)
         acessoWindows = threading.Thread(target=self.fazAcessoWindows,args=[self])
         acessoWindows.start()
-
-
+        acessoWindows.wait()
+        self.botaoAcesso1.set_sensitive(True)
 
 
 
