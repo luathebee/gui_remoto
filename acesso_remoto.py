@@ -22,7 +22,10 @@ class Base:
         #Usa o remmina com o arquivo .rpd com as configs desejadas
         args = ("/usr/bin/remmina -c terminal_windows.rdp ")
         print("Iniciando sessao Remmina")
-        popen = subprocess.call(args,stdout=subprocess.PIPE,shell=True)
+        #popenWindows = subprocess.call("exec " + args,stdout=subprocess.PIPE,shell=True)
+        popenWindows = subprocess.Popen("exec " + args,stdout=subprocess.PIPE,shell=True)
+        popenWindows.kill()
+        print("matou")
 
 
     ## ------------------------------------------
@@ -35,7 +38,10 @@ class Base:
         #uma vez que as confs seja ddefinidas, --no-session-edit bloqueia o acesso a as configs
         args = ("/usr/bin/x2goclient --session-conf=sessions --session=linux_remoto --close-disconnect --thinclient")
         print("Iniciando sessao X2Go")
-        subprocess.call(args,stdout=subprocess.PIPE,shell=True)
+        #popenLinux = subprocess.call("exec " + args,stdout=subprocess.PIPE,shell=True)
+        popenLinux = subprocess.Popen("exec " + args,stdout=subprocess.PIPE,shell=True)
+        popenLinux.kill()
+        print("matou")
 
     ## ------------------------------------------
     ##  *instanciaLinux*
