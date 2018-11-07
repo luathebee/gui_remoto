@@ -68,30 +68,36 @@ class Base:
             self.window.set_size_request(350,200)
 
 
-            self.button1 = gtk.Button("Fechar Janela")
-            self.button2 = gtk.Button("Acesso Windows")
-            self.button3 = gtk.Button("Acesso Linux")
+            self.botaoFechar = gtk.Button("Fechar Janela")
+            self.botaoAcesso1 = gtk.Button("Acesso Windows")
+            self.botaoAcesso2 = gtk.Button("Acesso Linux")
+            self.botaoFecha1 = gtk.Button("Interrompe Windows")
+            self.botaoFecha2 = gtk.Button("Interrompe Linux")
+
 
 
             self.vbox = gtk.VBox() #container vertical para os elementos
-            self.hbox = gtk.HBox() #container horizontal para os elementos
-
+            self.hbox1 = gtk.HBox() #container horizontal para os elementos
+            self.hbox2 = gtk.HBox()
 
          ##Posicionamento por container vertical/horizontal
          ##Adiciona os elementos no container horizontal, depois no vertical
-            self.hbox.pack_start(self.button2)
-            self.hbox.pack_start(self.button3)
-            self.vbox.pack_start(self.hbox)
-            self.vbox.pack_start(self.button1)
+            self.hbox1.pack_start(self.botaoAcesso1)
+            self.hbox1.pack_start(self.botaoFecha1)
+            self.vbox.pack_start(self.hbox1)
+            self.hbox2.pack_start(self.botaoAcesso2)
+            self.hbox2.pack_start(self.botaoFecha2)
+            self.vbox.pack_start(self.hbox2)
+            self.vbox.pack_start(self.botaoFechar)
 
             self.window.add(self.vbox)
             self.window.show_all()
 
 
             self.window.connect("destroy", self.destroy)
-            self.button1.connect_object("clicked", self.destroy, self.window)
-            self.button2.connect_object("clicked", self.instanciaWindows, self.window)
-            self.button3.connect_object("clicked", self.instanciaLinux, self.window)
+            self.botaoFechar.connect_object("clicked", self.destroy, self.window)
+            self.botaoAcesso1.connect_object("clicked", self.instanciaWindows, self.window)
+            self.botaoAcesso2.connect_object("clicked", self.instanciaLinux, self.window)
 
     def main (self):
         gtk.main()
