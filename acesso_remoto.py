@@ -43,11 +43,11 @@ class Base:
 
     def instanciaLinux(self, widget):
         #Defince a criacao da thread que instancia o acesso ao servidor
-        self.botaoAcesso2.set_sensitive(False)
+        #self.botaoAcesso2.set_sensitive(False)
         acessoLinux = threading.Thread(target=self.fazAcessoLinux,args=[self])
         acessoLinux.start()
         acessoLinux.wait()
-        self.botaoAcesso2.set_sensitive(True)
+        #self.botaoAcesso2.set_sensitive(True)
 
 
     ## ------------------------------------------
@@ -56,11 +56,11 @@ class Base:
 
     def instanciaWindows(self, widget):
         #Defince a criacao da thread que instancia o acesso ao servidor
-        self.botaoAcesso1.set_sensitive(False)
+        #self.botaoAcesso1.set_sensitive(False)
         acessoWindows = threading.Thread(target=self.fazAcessoWindows,args=[self])
         acessoWindows.start()
         acessoWindows.wait()
-        self.botaoAcesso1.set_sensitive(True)
+        #self.botaoAcesso1.set_sensitive(True)
 
 
 
