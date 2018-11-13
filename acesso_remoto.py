@@ -74,8 +74,27 @@ class Base:
     def __init__(self):
             self.window =  gtk.Window(gtk.WINDOW_TOPLEVEL)
             self.window.set_position(gtk.WIN_POS_CENTER)
-            self.window.set_size_request(350,200)
+            self.window.set_size_request(600,500)
 
+            self.labelUFSC = gtk.Label("  _    _ ______ _____  _____ \n"
+                                       " | |  | |  ____/ ____|/ ____|\n"
+                                       " | |  | | |__ | (___ | |     \n"
+                                       " | |  | |  __| \___ \| |     \n"
+                                       " | |__| | |    ____) | |____ \n"
+                                       "  \____/|_|   |_____/ \_____|")
+            self.labelIntro = gtk.Label("Escolha a forma de acesso remoto desejada: ")
+
+
+            self.labelLinux = gtk.Label("Acesso remoto em GNU/Linux: \n "
+                                   "idufusc\n"
+                                   "senha do idufsc")
+            self.labelLinux.set_line_wrap(True)
+
+            self.labelWindows = gtk.Label("Acesso remoto no Terminal Academico:\n"
+                                   "idufusc\n"
+                                   "senha do idufsc\n"
+                                   "ufsc.br")
+            self.labelWindows.set_line_wrap(True)
 
             self.botaoFechar = gtk.Button("Fechar Janela")
             self.botaoAcesso1 = gtk.Button("Acesso Windows")
@@ -89,9 +108,13 @@ class Base:
 
          ##Posicionamento por container vertical/horizontal
          ##Adiciona os elementos no container horizontal, depois no vertical
+            self.vbox.pack_start(self.labelUFSC)
+            self.vbox.pack_start(self.labelIntro)
             self.hbox1.pack_start(self.botaoAcesso1)
+            self.hbox1.pack_start(self.botaoAcesso2)
             self.vbox.pack_start(self.hbox1)
-            self.hbox2.pack_start(self.botaoAcesso2)
+            self.hbox2.pack_start(self.labelWindows)
+            self.hbox2.pack_start(self.labelLinux)
             self.vbox.pack_start(self.hbox2)
             self.vbox.pack_start(self.botaoFechar)
 
