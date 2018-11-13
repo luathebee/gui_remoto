@@ -5,7 +5,6 @@ pygtk.require('2.0')
 
 class Base:
 
-
     ## ------------------------------------------
     ##  *Destroy*
     ## ------------------------------------------
@@ -52,7 +51,6 @@ class Base:
         #self.botaoAcesso2.set_sensitive(False)
         acessoLinux = threading.Thread(target=self.fazAcessoLinux,args=[self])
         acessoLinux.start()
-        acessoLinux.wait()
         #self.botaoAcesso2.set_sensitive(True)
 
 
@@ -65,7 +63,6 @@ class Base:
         #self.botaoAcesso1.set_sensitive(False)
         acessoWindows = threading.Thread(target=self.fazAcessoWindows,args=[self])
         acessoWindows.start()
-        acessoWindows.wait()
         #self.botaoAcesso1.set_sensitive(True)
 
 
