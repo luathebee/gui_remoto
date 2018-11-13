@@ -80,8 +80,6 @@ class Base:
             self.botaoFechar = gtk.Button("Fechar Janela")
             self.botaoAcesso1 = gtk.Button("Acesso Windows")
             self.botaoAcesso2 = gtk.Button("Acesso Linux")
-            self.botaoFecha1 = gtk.Button("Interrompe Windows")
-            self.botaoFecha2 = gtk.Button("Interrompe Linux")
 
 
 
@@ -92,10 +90,8 @@ class Base:
          ##Posicionamento por container vertical/horizontal
          ##Adiciona os elementos no container horizontal, depois no vertical
             self.hbox1.pack_start(self.botaoAcesso1)
-            self.hbox1.pack_start(self.botaoFecha1)
             self.vbox.pack_start(self.hbox1)
             self.hbox2.pack_start(self.botaoAcesso2)
-            self.hbox2.pack_start(self.botaoFecha2)
             self.vbox.pack_start(self.hbox2)
             self.vbox.pack_start(self.botaoFechar)
 
