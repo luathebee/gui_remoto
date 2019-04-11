@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Startup Window
+Exec=/usr/sbin/startup_window.py
+
