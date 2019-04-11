@@ -1,5 +1,5 @@
 # gui_remoto
-Interface gráfica para acessar opções de acesso remoto previamente configuradas
+	Interface gráfica para acessar opções de acesso remoto previamente configuradas.
 
 ### Acesso ao Windows
 	Inicia o remmina com o arquivo RDP com os parametros de acesso remoto ao terminal acadêmico da UFSC. 
@@ -9,7 +9,8 @@ Interface gráfica para acessar opções de acesso remoto previamente configurad
 	Inicia uma sessão do X2Go definida no arquivo "sessions". Solicita usuário e senha para o acesso remoto.
 	Opção de SSH Login permite o uso das credenciais do usuário cliente no login do anfitrião automáticamente. Testar implementação.
 	
-
+### Iniciar com login
+	O arquivo .desktop deve ser colocado em /etc/xdg/autostart/. A janela será exibida após o início da sessão pelo usuário.
 
 ### Problemas
 	1. Programa trava com o de uma das opções (busy waiting). Threads podem resolver
