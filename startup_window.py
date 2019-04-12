@@ -36,6 +36,15 @@ class Base:
         subprocess.call(args,stdout=subprocess.PIPE,shell=True)
         popen.wait()
 
+    
+    ## -----------------------------------------
+    ##  *PLANO DE FUNDO*
+    ## -----------------------------------------
+
+    def draw_pixbuf(widget, event):
+        path = 'resources/test.png'  ##endereco do plano de fundo
+        pixbuf = gtk.gdk.pixbuf_new_from_file(path)
+        widget.window.draw_pixbuf(widget.style.bg_gc[gtk.STATE_NORMAL], pixbuf, 0, 0, 0,0)
 
     ## ------------------------------------------
     ##  *CONSTRUTOR*
@@ -44,7 +53,8 @@ class Base:
     def __init__(self):
             self.window =  gtk.Window(gtk.WINDOW_TOPLEVEL)
             self.window.set_position(gtk.WIN_POS_CENTER)
-            self.window.set_size_request(350,200)
+            self.window.set_size_request(500,500)
+            
            
             self.button1 = gtk.Button("Fechar Janela")
            
@@ -56,6 +66,9 @@ class Base:
 
             self.hbox = gtk.HBox() #container horizontal para os elementos
 
+
+        ##Define o plano de fundo atraves da funcao draw_pixbuff
+            self.hbox.connect('expose-event', self.draw_pixbuf)
 
          ##Posicionamento por container vertical/horizontal
          ##Adiciona os elementos no container horizontal, depois no vertical
