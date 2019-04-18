@@ -17,6 +17,21 @@ from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush
 from PyQt5.QtCore import QSize
 
 
-import subprocess
+import subprocess, sys
+
+
+class MainWindow(QWidget):
+    def __init__(self, widthMain, heightMain):
+        QWidget.__init__(self)
+        self.setGeometry(widthMain, widthMain, heightMain, heightMain)
+
+
+
+if __name__ == "__main__":
+
+    app = QApplication(sys.argv)
+    mainwindow = MainWindow(400,700)
+    sys.exit(app.exec_())
+
 
 

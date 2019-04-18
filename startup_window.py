@@ -1,11 +1,11 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python2
 
-import pygtk, gtk, subprocess
+import pygtk, gtk, cairo, subprocess
 pygtk.require('2.0')
 
 class Base:
 
-  
+
     ## ------------------------------------------
     ##  *Destroy*
     ##
@@ -44,8 +44,9 @@ class Base:
     def draw_pixbuf(widget, event):
         path = 'resources/test.png'  ##endereco do plano de fundo
         pixbuf = gtk.gdk.pixbuf_new_from_file(path)
-        widget.window.draw_pixbuf(widget.style.bg_gc[gtk.STATE_NORMAL], pixbuf, 0, 0, 0,0)
-
+        #depercated below
+        .draw_pixbuf(widget.style.bg_gc[gtk.STATE_NORMAL], self.pixbuf, 0, 0, 0, 0)
+        #self.gdk_cairo_set_source_pixbuf(pixbuf)
     ## ------------------------------------------
     ##  *CONSTRUTOR*
     ## ------------------------------------------
@@ -68,9 +69,10 @@ class Base:
 
 
         ##Define o plano de fundo atraves da funcao draw_pixbuff
-            self.hbox.connect('expose-event', self.draw_pixbuf)
-
-         ##Posicionamento por container vertical/horizontal
+            self.hbox.connect(self.draw_pixbuf('expose-event'))
+        
+        
+        ##Posicionamento por container vertical/horizontal
          ##Adiciona os elementos no container horizontal, depois no vertical
             self.hbox.pack_start(self.button2)
             self.hbox.pack_start(self.button3)
