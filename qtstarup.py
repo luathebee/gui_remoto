@@ -25,6 +25,13 @@ class MainWindow(QWidget):
         QWidget.__init__(self)
         self.setGeometry(widthMain, widthMain, heightMain, heightMain)
 
+        ## ------------ background ---------
+        oImage = QImage("resources/bkgd.png")
+        sImage = oImage.scaled(QSize(400, 700))
+        palette = QPalette()
+        palette.setBrush(10, QBrush(sImage))
+        self.setPalette(palette)
+
         ## ------------ elementos ----------
         ## ------ botao 1
         button1 = QPushButton()
