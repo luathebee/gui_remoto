@@ -27,7 +27,7 @@ class MainWindow(QWidget):
 
         ## ------------ background ---------
         oImage = QImage("resources/bkgd.png")
-        sImage = oImage.scaled(QSize(400, 700))
+        sImage = oImage.scaled(QSize(1920, 1080))
         palette = QPalette()
         palette.setBrush(10, QBrush(sImage))
         self.setPalette(palette)
@@ -35,17 +35,17 @@ class MainWindow(QWidget):
         ## ------------ elementos ----------
         ## ------ botao 1
         button1 = QPushButton()
-        button1.setGeometry(250, 250, 300, 300)
+        button1.setFixedSize(QSize(300,250))
         icon1 = QIcon('resources/ubuntu_button.png')
         button1.setIcon(icon1)
-        button1.setIconSize(QSize(200, 250))
+        button1.setIconSize(QSize(250, 300))
 
         ## ------ botao 2
         button2 = QPushButton()
-        button2.setGeometry(250, 250, 300, 300)
+        button2.setFixedSize(QSize(300,250))
         icon2 = QIcon('resources/windows_button.png')
         button2.setIcon(icon2)
-        button2.setIconSize(QSize(200, 250))
+        button2.setIconSize(QSize(250, 300))
 
         ## ------ botao 3 (not yet)
         #button3 = QPushButton()
@@ -53,8 +53,10 @@ class MainWindow(QWidget):
 
         ## ----------- layout ----------
         layoutbuttons = QHBoxLayout()
-        layoutbuttons.addWidget(button1)
-        layoutbuttons.addWidget(button2)
+        layoutbuttons.setContentsMargins(50,50,50,50)
+        layoutbuttons.setSpacing(25)
+        layoutbuttons.addWidget(button1, 100)
+        layoutbuttons.addWidget(button2, 100)
         self.setLayout(layoutbuttons)
 
         ## ----------- voila ----------
@@ -64,7 +66,7 @@ class MainWindow(QWidget):
 if __name__ == "__main__":
 
     app = QApplication(sys.argv)
-    mainwindow = MainWindow(400,700)
+    mainwindow = MainWindow(1920,1080)
     sys.exit(app.exec_())
 
 
