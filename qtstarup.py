@@ -17,10 +17,25 @@ from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush
 from PyQt5.QtCore import QSize , Qt
 
 
-import subprocess, sys
+import subprocess, sys , threading
 
 
 class MainWindow(QWidget):
+
+    def button1clicked():
+        alert = QMessageBox()
+        alert.setText('abrindo remmina')
+        #args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
+        #popen = subprocess.call(args, stdout=subprocess.PIPE, shell=True)
+        thread1 = threading.Thread(target=MainWindow.remminaThread, args=[])
+        thread1.start()
+        # popen.wait()
+        alert.exec_()
+
+    def remminaThread():
+        args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
+        popen = subprocess.call(args, stdout=subprocess.PIPE, shell=True)
+
     def __init__(self, widthMain, heightMain):
         QWidget.__init__(self)
         self.setGeometry(widthMain, widthMain, heightMain, heightMain)
@@ -40,6 +55,7 @@ class MainWindow(QWidget):
         icon1 = QIcon('resources/ubuntu_button.png')
         button1.setIcon(icon1)
         button1.setIconSize(QSize(250, 300))
+        button1.clicked.connect(MainWindow.button1clicked)
 
         ## ------ botao 2
         button2 = QPushButton()
@@ -47,6 +63,14 @@ class MainWindow(QWidget):
         icon2 = QIcon('resources/windows_button.png')
         button2.setIcon(icon2)
         button2.setIconSize(QSize(250, 300))
+
+        ## ------ button 3
+        button3 = QPushButton('Fechar')
+        button3.setFixedSize(QSize(75,50))
+        button3.setStyleSheet('color: black; font-size: 15px')
+        button3.clicked.connect(qApp.quit)
+
+
 
         ## ------ header 1
         header1 = QLabel('Seja bem vindo! \n Escolha uma das opções abaixo para acessar o sistema:')
@@ -56,18 +80,23 @@ class MainWindow(QWidget):
 
         ## ----------- layout ----------
         layoutbuttons = QHBoxLayout()
-        layoutbuttons.setContentsMargins(50,50,50,50)
+        #layoutbuttons.setContentsMargins(50,50,50,50)
         layoutbuttons.setSpacing(25)
         layoutbuttons.addWidget(button1, 100)
         layoutbuttons.addWidget(button2, 100)
 
+        layoutquit = QHBoxLayout()
+        layoutquit.addWidget(button3)
+
         layoutcoluna1 = QVBoxLayout()
-        #layoutcoluna1.setSpacing(25)
-        layoutcoluna1.setContentsMargins(0, 200, 0, 200)
+        layoutcoluna1.setContentsMargins(50, 200, 50, 200)
+        layoutcoluna1.setSpacing(20)
         layoutcoluna1.addWidget(header1)
         layoutcoluna1.addLayout(layoutbuttons)
+        layoutcoluna1.addLayout(layoutquit)
 
 
+        # ----- Layout final
         self.setLayout(layoutcoluna1)
 
         ## ----------- voila ----------
