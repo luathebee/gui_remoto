@@ -17,24 +17,35 @@ from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush
 from PyQt5.QtCore import QSize , Qt
 
 
-import subprocess, sys , threading
+import subprocess, sys , threading, time
 
 
 class MainWindow(QWidget):
 
     def button1clicked():
         alert = QMessageBox()
-        alert.setText('abrindo remmina')
-        #args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
-        #popen = subprocess.call(args, stdout=subprocess.PIPE, shell=True)
-        thread1 = threading.Thread(target=MainWindow.remminaThread, args=[])
-        thread1.start()
-        # popen.wait()
+        alert.setIcon(QMessageBox.Warning)
+        alert.setText('Verificando conexão ao Terminal Acadêmico. \n Aguarde...')
         alert.exec_()
+
+        if subprocess.call("ping -c 3 acadmico.terminal.ufsc.br", stdout=subprocess.PIPE, shell=True) == 0 :
+            alert.setText('Conexão bem sucedida')
+            #args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
+            #popen = subprocess.call(args, stdout=subprocess.PIPE, shell=True)
+            thread1 = threading.Thread(target=MainWindow.remminaThread, args=[])
+            thread1.start()
+            alert.destroy(alert)
+            # popen.wait()
+        else:
+            alert.setText('Não foi possível se conectar com o servidor remoto. \n'
+                          'tente novamente mais tarde')
+        alert.exec_()
+
+
 
     def remminaThread():
         args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
-        popen = subprocess.call(args, stdout=subprocess.PIPE, shell=True)
+        popen = subprocess.Popen(args, stdout=subprocess.PIPE, shell=True)
 
     def __init__(self, widthMain, heightMain):
         QWidget.__init__(self)
@@ -87,6 +98,8 @@ class MainWindow(QWidget):
 
         layoutquit = QHBoxLayout()
         layoutquit.addWidget(button3)
+        layoutquit.setSpacing(25)
+
 
         layoutcoluna1 = QVBoxLayout()
         layoutcoluna1.setContentsMargins(50, 200, 50, 200)
