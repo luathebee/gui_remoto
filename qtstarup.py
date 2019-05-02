@@ -42,6 +42,13 @@ class MainWindow(QWidget):
         alert.exec_()
 
 
+    def centerWindow(self):
+        box = self.frameGeometry()
+        center = QDesktopWidget().availableGeometry().center()
+        box.moveCenter(center)
+        self.move(box.topLeft())
+
+
 
     def remminaThread():
         args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
@@ -114,6 +121,7 @@ class MainWindow(QWidget):
 
         ## ----------- voila ----------
         self.show()
+        self.centerWindow()
 
 
 if __name__ == "__main__":
