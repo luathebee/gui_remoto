@@ -75,11 +75,15 @@ class MainWindow(QWidget):
         self.setPalette(palette)
 
         ## ------------ elementos ----------
+
+
+
         ## ------ botao 1
         button1 = QPushButton()
         button1.setMaximumSize(QSize(300,250))
-        icon1 = QIcon('resources/ubuntu_button.png')
+        icon1 = QIcon('resources/ubuntu.png')
         button1.setIcon(icon1)
+        button1.setStyleSheet('background-color: #30179c')
         button1.setIconSize(QSize(250, 300))
         button1.clicked.connect(MainWindow.button1clicked)
 
@@ -91,8 +95,9 @@ class MainWindow(QWidget):
         ## ------ botao 2
         button2 = QPushButton()
         button2.setFixedSize(QSize(300,250))
-        icon2 = QIcon('resources/windows_button.png')
+        icon2 = QIcon('resources/windows.png')
         button2.setIcon(icon2)
+        button2.setStyleSheet('background-color: #30179c')
         button2.setIconSize(QSize(250, 300))
         button2.clicked.connect(MainWindow.button2clicked)
 
@@ -106,7 +111,7 @@ class MainWindow(QWidget):
         ## ------ button 3
         button3 = QPushButton('Fechar')
         button3.setFixedSize(QSize(75,50))
-        button3.setStyleSheet('color: black; font-size: 15px')
+        button3.setStyleSheet('color: white; font-size: 20px;background-color: #30179c ')
         button3.clicked.connect(qApp.quit)
 
 
