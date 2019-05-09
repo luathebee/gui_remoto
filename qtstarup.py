@@ -13,7 +13,7 @@ Requisitos de instalação: Python 3.X, PyQt5
 # --------------------
 
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush
+from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush, QPixmap
 from PyQt5.QtCore import QSize , Qt
 
 import subprocess, sys , threading, time
@@ -64,8 +64,8 @@ class MainWindow(QWidget):
 
     def __init__(self, widthMain, heightMain):
         QWidget.__init__(self)
-        self.setGeometry(widthMain, widthMain, heightMain, heightMain)
-        self.setMinimumSize(QSize(700,700))
+        #self.setGeometry(widthMain, widthMain, heightMain, heightMain)
+        self.setFixedSize(QSize(widthMain,heightMain))
 
         ## ------------ background ---------
         oImage = QImage("resources/bkgd.png")
@@ -77,7 +77,7 @@ class MainWindow(QWidget):
         ## ------------ elementos ----------
         ## ------ botao 1
         button1 = QPushButton()
-        button1.setFixedSize(QSize(300,250))
+        button1.setMaximumSize(QSize(300,250))
         icon1 = QIcon('resources/ubuntu_button.png')
         button1.setIcon(icon1)
         button1.setIconSize(QSize(250, 300))
@@ -117,15 +117,24 @@ class MainWindow(QWidget):
         header1.setStyleSheet('color: white; font-size: 25px')
 
 
+        ## ------- imagemUFSC
+        imagemufsc = QLabel(self)
+        pixmapufsc = QPixmap('resources/ufsc.png')
+        pixmapufsc.scaled(150, 225, Qt.KeepAspectRatio)
+        imagemufsc.setPixmap(pixmapufsc)
+
+
         ## ----------- layout ----------
         layoutVbuttons1 = QVBoxLayout()
-        layoutVbuttons1.addWidget(button1, 100)
+        layoutVbuttons1.addWidget(button1)
         layoutVbuttons1.addWidget(labelbutton1)
+        layoutVbuttons1.setAlignment(Qt.AlignCenter)
 
 
         layoutVbuttons2 = QVBoxLayout()
         layoutVbuttons2.addWidget(button2, 100)
         layoutVbuttons2.addWidget(labelbutton2)
+        layoutVbuttons2.setAlignment(Qt.AlignCenter)
 
 
         layoutbuttons = QHBoxLayout()
@@ -140,14 +149,27 @@ class MainWindow(QWidget):
 
 
         layoutcoluna1 = QVBoxLayout()
-        layoutcoluna1.setContentsMargins(50, 200, 50, 200)
         layoutcoluna1.setSpacing(40)
         layoutcoluna1.addWidget(header1)
         layoutcoluna1.addLayout(layoutbuttons)
         layoutcoluna1.addLayout(layoutquit)
 
+        # --- layout main
+        layoutcoluna2 = QVBoxLayout()
+        layoutcoluna2.setAlignment(Qt.AlignCenter)
+        layoutcoluna2.addWidget(imagemufsc)
+
+        # --- layout main
+        layoutmain = QHBoxLayout()
+        layoutmain.addLayout(layoutcoluna1)
+        layoutmain.addLayout(layoutcoluna2)
+        layoutmain.setContentsMargins(50, 200, 50, 200)
+
+
+
         # ----- Layout final
-        self.setLayout(layoutcoluna1)
+        self.setLayout(layoutmain)
+
 
         ## ----------- voila ----------
         self.show()
@@ -157,7 +179,7 @@ class MainWindow(QWidget):
 if __name__ == "__main__":
 
     app = QApplication(sys.argv)
-    mainwindow = MainWindow(1920,1080)
+    mainwindow = MainWindow(1200,900)
     sys.exit(app.exec_())
 
 
