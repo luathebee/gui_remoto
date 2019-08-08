@@ -25,16 +25,20 @@ class MainWindow(QWidget):
 
 
     def button1clicked(self):
-        info1 = windows_info.WindowsInfo()
-        info1.exec_()
+        confirma = QMessageBox.question(self, 'PyQt5 message', "Deseja acessar diretamente o rasp?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if confirma == QMessageBox.No:
+            alert1 = QMessageBox.information('PyQt5 message', "Obrigado por usar o rasp")
+            qApp.quit()
+
 
     def button2clicked(self):
-        alert = QMessageBox()
-        alert.setIcon(QMessageBox.Warning)
-        alert.setText('Verificando conexão ao Terminal Acadêmico. \n Aguarde...')
-        alert.exec_()
+        alert2 = QMessageBox()
+        alert2.setIcon(QMessageBox.Warning)
+        alert2.setText('Verificando conexão ao Terminal Acadêmico. \n Aguarde...')
+        alert2.exec_()
 
-        if subprocess.call("ping -c 3 acadmico.terminal.ufsc.br", stdout=subprocess.PIPE, shell=True) == 0 :
+        if True:
+        #if subprocess.call("ping -c 3 acadmico.terminal.ufsc.br", stdout=subprocess.PIPE, shell=True) == 0 :
             alert.setText('Conexão bem sucedida')
             #args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
             #popen = subprocess.call(args, stdout=subprocess.PIPE, shell=True)
@@ -42,11 +46,17 @@ class MainWindow(QWidget):
             thread1.start()
             alert.destroy(alert)
             # popen.wait()
-        else:
-            alert.setText('Não foi possível se conectar com o servidor remoto. \n'
-                          'tente novamente mais tarde')
+        #else:
+         #   alert.setText('Não foi possível se conectar com o servidor remoto. \n'
+          #                'tente novamente mais tarde')
         alert.exec_()
 
+    def button4clicked(self):
+        print('lel')
+
+    def button5clicked(self):
+        info1 = windows_info.WindowsInfo()
+        info1.show()
 
     def centerWindow(self):
         box = self.frameGeometry()
@@ -55,11 +65,9 @@ class MainWindow(QWidget):
         self.move(box.topLeft())
 
 
-#    def button1clicked(self):
-
 
     def remminathread():
-        args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
+        args = ("/usr/bin/remmina -c /opt/gui_remoto/terminal_windows.rdp")
         popen = subprocess.Popen(args, stdout=subprocess.PIPE, shell=True)
 
     def __init__(self, widthMain, heightMain):
@@ -68,22 +76,21 @@ class MainWindow(QWidget):
         self.setFixedSize(QSize(widthMain,heightMain))
 
         ## ------------ background ---------
-        oImage = QImage("resources/bkgd.png")
+        oImage = QImage("/opt/gui_remoto/resources/bkgd.png")
         sImage = oImage.scaled(QSize(1920, 1080))
         palette = QPalette()
         palette.setBrush(10, QBrush(sImage))
         self.setPalette(palette)
 
+
         ## ------------ elementos ----------
-
-
 
         ## ------ botao 1
         button1 = QPushButton()
         button1.setMaximumSize(QSize(300,250))
-        icon1 = QIcon('resources/ubuntu.png')
+        icon1 = QIcon('/opt/gui_remoto/resources/ubuntu.png')
         button1.setIcon(icon1)
-        button1.setStyleSheet('background-color: #30179c')
+        button1.setStyleSheet('background-color: #FFFFFF')
         button1.setIconSize(QSize(250, 300))
         button1.clicked.connect(MainWindow.button1clicked)
 
@@ -94,10 +101,10 @@ class MainWindow(QWidget):
 
         ## ------ botao 2
         button2 = QPushButton()
-        button2.setFixedSize(QSize(300,250))
-        icon2 = QIcon('resources/windows.png')
+        button2.setMaximumSize(QSize(300,250))
+        icon2 = QIcon('/opt/gui_remoto/resources/windows.png')
         button2.setIcon(icon2)
-        button2.setStyleSheet('background-color: #30179c')
+        button2.setStyleSheet('background-color: #ffffff')
         button2.setIconSize(QSize(250, 300))
         button2.clicked.connect(MainWindow.button2clicked)
 
@@ -111,9 +118,25 @@ class MainWindow(QWidget):
         ## ------ button 3
         button3 = QPushButton('Fechar')
         button3.setFixedSize(QSize(75,50))
-        button3.setStyleSheet('color: white; font-size: 20px;background-color: #30179c ')
+        button3.setStyleSheet('color: black; font-size: 20px;background-color: #30179c ')
         button3.clicked.connect(qApp.quit)
 
+
+        ## ------ button 4
+        button4 = QPushButton('Informações \nsobre Raspberry')
+        button4.setFixedSize(QSize(170,50))
+        button4.setIcon(icon1)
+        button4.setStyleSheet('color: black; font-size: 14px;background-color: #30179c ')
+        button4.setIconSize(QSize(30,30))
+        button4.clicked.connect(MainWindow.button4clicked)
+
+        ## ------ button 5
+        button5 = QPushButton('Informações \nsobre Windows')
+        button5.setFixedSize(QSize(170, 50))
+        button5.setIcon(icon2)
+        button5.setStyleSheet('color: black; font-size: 14px;background-color: #30179c ')
+        button5.setIconSize(QSize(30, 30))
+        button5.clicked.connect(MainWindow.button5clicked)
 
 
         ## ------ header 1
@@ -124,7 +147,7 @@ class MainWindow(QWidget):
 
         ## ------- imagemUFSC
         imagemufsc = QLabel(self)
-        pixmapufsc = QPixmap('resources/ufsc.png')
+        pixmapufsc = QPixmap('/opt/gui_remoto/resources/ufsc.png')
         pixmapufsc.scaled(150, 225, Qt.KeepAspectRatio)
         imagemufsc.setPixmap(pixmapufsc)
 
@@ -137,7 +160,7 @@ class MainWindow(QWidget):
 
 
         layoutVbuttons2 = QVBoxLayout()
-        layoutVbuttons2.addWidget(button2, 100)
+        layoutVbuttons2.addWidget(button2)
         layoutVbuttons2.addWidget(labelbutton2)
         layoutVbuttons2.setAlignment(Qt.AlignCenter)
 
@@ -148,16 +171,23 @@ class MainWindow(QWidget):
         layoutbuttons.addLayout(layoutVbuttons1)
         layoutbuttons.addLayout(layoutVbuttons2)
 
-        layoutquit = QHBoxLayout()
-        layoutquit.addWidget(button3)
+        layouthelp = QHBoxLayout()
+        layouthelp.addWidget(button4)
+        layouthelp.addWidget(button5)
         #layoutquit.setSpacing(25)
 
+        layoutquit = QHBoxLayout()
+        layoutquit.addWidget(button3)
 
         layoutcoluna1 = QVBoxLayout()
         layoutcoluna1.setSpacing(40)
+        layoutcoluna1.setAlignment(Qt.AlignCenter)
         layoutcoluna1.addWidget(header1)
         layoutcoluna1.addLayout(layoutbuttons)
+        layoutcoluna1.addLayout(layouthelp)
         layoutcoluna1.addLayout(layoutquit)
+
+
 
         # --- layout main
         layoutcoluna2 = QVBoxLayout()
@@ -168,7 +198,7 @@ class MainWindow(QWidget):
         layoutmain = QHBoxLayout()
         layoutmain.addLayout(layoutcoluna1)
         layoutmain.addLayout(layoutcoluna2)
-        layoutmain.setContentsMargins(50, 200, 50, 200)
+        layoutmain.setContentsMargins(50, 50, 50, 50)
 
 
 

@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush, QPixmap
@@ -8,13 +10,15 @@ class WindowsInfo(QWidget):
 
     def __init__(self):
         QWidget.__init__(self)
-        self.setGeometry(500, 500, 500, 500)
+        self.setMaximumSize(500, 500)
+#        self.setStyleSheet('background-color: #30179c')
 
 
         ## ---------- Textos ----------
 
         infoheader = QLabel('Terminal Academico Remoto')
         infoheader.setStyleSheet('font-size: 25px')
+        infoheader.setAlignment(Qt.AlignCenter)
 
         infotext = QLabel('Ao acessar o termianal acadêmico da UFSC é possível acessar programas \n'
                           'como Photoshop, Autocad, entre outros.\n')
@@ -26,7 +30,7 @@ class WindowsInfo(QWidget):
 
         # --------- Imagem ------------
         image = QLabel(self)
-        pixmap = QPixmap('resources/softwarelist.png')
+        pixmap = QPixmap('/opt/gui_remoto-betterui/resources/softwarelist.png')
         image.setPixmap(pixmap)
 
         #---------- Botoes ------------
