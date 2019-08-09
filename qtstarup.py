@@ -61,7 +61,7 @@ class MainWindow(QWidget):
 
     def button5clicked(self):
         info1 = windows_info.WindowsInfo()
-        info1.show()
+        info1.exec_()
 
     def centerWindow(self):
         box = self.frameGeometry()
