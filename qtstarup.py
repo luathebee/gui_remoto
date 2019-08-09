@@ -11,7 +11,6 @@ Requisitos de instalação: Python 3.X, PyQt5
 # --------------------
 # IMPORTS
 # --------------------
-
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush, QPixmap
 from PyQt5.QtCore import QSize , Qt
@@ -20,6 +19,12 @@ import subprocess, sys , threading, time
 
 # outra janela
 import windows_info
+
+#endereço da diretorio de trabalho
+import os 
+
+resPath = os.getcwd() + '/resources'
+
 
 class MainWindow(QWidget):
 
@@ -76,7 +81,7 @@ class MainWindow(QWidget):
         self.setFixedSize(QSize(widthMain,heightMain))
 
         ## ------------ background ---------
-        oImage = QImage("/opt/gui_remoto/resources/bkgd.png")
+        oImage = QImage(resPath + "/bkgd.png")
         sImage = oImage.scaled(QSize(1920, 1080))
         palette = QPalette()
         palette.setBrush(10, QBrush(sImage))
@@ -88,7 +93,7 @@ class MainWindow(QWidget):
         ## ------ botao 1
         button1 = QPushButton()
         button1.setMaximumSize(QSize(300,250))
-        icon1 = QIcon('/opt/gui_remoto/resources/ubuntu.png')
+        icon1 = QIcon(resPath +'/ubuntu.png')
         button1.setIcon(icon1)
         button1.setStyleSheet('background-color: #FFFFFF')
         button1.setIconSize(QSize(250, 300))
@@ -102,7 +107,7 @@ class MainWindow(QWidget):
         ## ------ botao 2
         button2 = QPushButton()
         button2.setMaximumSize(QSize(300,250))
-        icon2 = QIcon('/opt/gui_remoto/resources/windows.png')
+        icon2 = QIcon(resPath + '/windows.png')
         button2.setIcon(icon2)
         button2.setStyleSheet('background-color: #ffffff')
         button2.setIconSize(QSize(250, 300))

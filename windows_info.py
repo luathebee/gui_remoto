@@ -4,7 +4,9 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon, QImage, QPalette, QBrush, QPixmap
 from PyQt5.QtCore import QSize , Qt, QCoreApplication
-import sys
+import sys, os
+resPath = os.getcwd() + '/resources'
+
 
 class WindowsInfo(QWidget):
 
@@ -30,7 +32,7 @@ class WindowsInfo(QWidget):
 
         # --------- Imagem ------------
         image = QLabel(self)
-        pixmap = QPixmap('/opt/gui_remoto-betterui/resources/softwarelist.png')
+        pixmap = QPixmap( resPath + '/softwarelist.png')
         image.setPixmap(pixmap)
 
         #---------- Botoes ------------
