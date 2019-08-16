@@ -39,17 +39,17 @@ class MainWindow(QWidget):
     def button2clicked(self):
         alert2 = QMessageBox()
         alert2.setIcon(QMessageBox.Warning)
-        alert2.setText('Verificando conexão ao Terminal Acadêmico. \n Aguarde...')
-        alert2.exec_()
+        #alert2.setText('Verificando conexão ao Terminal Acadêmico. \n Aguarde...')
+        #alert2.exec_()
 
-        if True:
+        #if True:
         #if subprocess.call("ping -c 3 acadmico.terminal.ufsc.br", stdout=subprocess.PIPE, shell=True) == 0 :
-            alert.setText('Conexão bem sucedida')
+          #  alert.setText('Conexão bem sucedida')
             #args = ("/usr/bin/remmina -c /home/rubenszanatta/Projetos/gui_remoto/terminal_windows.rdp")
             #popen = subprocess.call(args, stdout=subprocess.PIPE, shell=True)
-            thread1 = threading.Thread(target=MainWindow.remminathread, args=[])
-            thread1.start()
-            alert.destroy(alert)
+        thread1 = threading.Thread(target=MainWindow.remminathread, args=[])
+        thread1.start()
+        alert.destroy(alert)
             # popen.wait()
         #else:
          #   alert.setText('Não foi possível se conectar com o servidor remoto. \n'
